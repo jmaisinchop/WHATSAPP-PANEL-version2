@@ -1,0 +1,48 @@
+# docker-compose.test.yml (TESTING)
+version: '3.8'
+
+services:
+  backend:
+    # ... (sin cambios en el backend)
+    build: ./whatsapp-panel
+    container_name: whatsapp_backend_test
+    restart: unless-stopped
+    env_file:
+      - ./whatsapp-panel/.env.test
+    environment:
+      - TZ=America/Guayaquil
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./whatsapp-panel/uploads_test:/app/uploads
+      - ./whatsapp-panel/secret:/app/secret
+      - ./whatsapp-panel/baileys_auth_info_test:/app/baileys_auth_info
+    depends_on:
+      - redis-test
+    networks:
+      - whatsapp-net-test
+
+  frontend:
+    build:
+      context: ./dashboard-whatsapp
+      # ----> INICIO DEL CAMBIO <----
+      args:
+        VITE_ENV_MODE: test # Le decimos que construya usando el modo 'test'
+      # ----> FIN DEL CAMBIO <----
+    container_name: whatsapp_frontend_test
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    networks:
+      - whatsapp-net-test
+
+  redis-test:
+    image: redis:6-alpine
+    container_name: whatsapp_redis_test
+    restart: unless-stopped
+    networks:
+      - whatsapp-net-test
+
+networks:
+  whatsapp-net-test:
+    driver: bridge

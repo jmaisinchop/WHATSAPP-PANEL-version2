@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+@layer base {
+  /* --- TEMA CLARO MEJORADO --- */
+  :root {
+    --background: 210 40% 98%;      /* Un gris muy claro en lugar de blanco puro */
+    --foreground: 222.2 84% 4.9%;   /* Un azul casi negro en lugar de negro puro */
+    --card: 0 0% 100%;              /* Las tarjetas en blanco puro para que resalten */
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;   /* Azul principal, vibrante y accesible */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;     /* Un gris azulado claro para elementos secundarios */
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;    /* Bordes sutiles */
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+ 
+  /* --- TEMA OSCURO MEJORADO --- */
+  .dark {
+    --background: 222.2 84% 4.9%;    /* Un azul muy oscuro y profundo */
+    --foreground: 210 40% 98%;       /* Texto claro, no blanco puro */
+    --card: 222.2 84% 10%;           /* Tarjetas ligeramente más claras para dar profundidad */
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;    /* Un azul ligeramente más brillante para que resalte en la oscuridad */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217.2 32.6% 17.5%;  /* Un gris azulado oscuro para botones secundarios */
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 217.2 91.2% 59.8%;
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    /* Efecto de transición suave al cambiar de tema */
+    @apply transition-colors duration-300;
+  }
+}

@@ -1,0 +1,42 @@
+# docker-compose.yml (PRODUCCIÓN)
+version: '3.8'
+
+services:
+  backend:
+    build: ./whatsapp-panel
+    container_name: whatsapp_backend_prod
+    restart: unless-stopped
+    env_file:
+      - ./whatsapp-panel/.env.production # <-- Carga las variables de producción
+    environment:
+      - TZ=America/Guayaquil
+    ports:
+      - "3000:3000" # Puerto para la API de producción
+    volumes:
+      - ./whatsapp-panel/uploads:/app/uploads
+      - ./whatsapp-panel/secret:/app/secret
+      - ./whatsapp-panel/baileys_auth_info:/app/baileys_auth_info
+    depends_on:
+      - redis
+    networks:
+      - whatsapp-net-prod
+
+  frontend:
+    build: ./dashboard-whatsapp
+    container_name: whatsapp_frontend_prod
+    restart: unless-stopped
+    ports:
+      - "8080:80" # Puerto para el frontend de producción
+    networks:
+      - whatsapp-net-prod
+
+  redis:
+    image: redis:6-alpine
+    container_name: whatsapp_redis_prod
+    restart: unless-stopped
+    networks:
+      - whatsapp-net-prod
+
+networks:
+  whatsapp-net-prod:
+    driver: bridge

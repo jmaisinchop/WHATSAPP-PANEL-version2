@@ -1,0 +1,12 @@
+/DOCKER SERVIDOR
+/dashboard-whatsapp/.env
+/dashboard-whatsapp/node_modules
+/dashboard-whatsapp/dist
+/whatsapp-panel/node_modules
+/whatsapp-panel/dist
+/whatsapp-panel/.env
+/whatsapp-panel/.wwebjs_cache
+/whatsapp-panel/sessions
+/whatsapp-panel/uploads
+/whatsapp-panel/secret
+wpanel-deployment.tar
